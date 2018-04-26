@@ -58,22 +58,23 @@ namespace AvalonServer.Gameplay.CreatePlayer
             if(valid)
             {
 
-                var player = new Player()
-                {
-                    Username = request.Username
-                };
+                throw new NotImplementedException();
+                //var player = new Player()
+                //{
+                //    Username = request.Username
+                //};
 
-                try
-                {
-                    Gateway.CreatePlayer(player);
-                    response.Success = true;
-                }
-                catch (PlayerGatewayException ex)
-                {
-                    response.Success = false;
-                    response.Messages.Add(ex.Message);
-                    return response;
-                }                
+                //try
+                //{
+                //    Gateway.CreatePlayer(player);
+                //    response.Success = true;
+                //}
+                //catch (PlayerGatewayException ex)
+                //{
+                //    response.Success = false;
+                //    response.Messages.Add(ex.Message);
+                //    return response;
+                //}                
 
             } else
             {

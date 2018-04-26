@@ -23,13 +23,13 @@ namespace AvalonServer.Gameplay.CreateGame
         {
             var valid = true;
 
-            // Check request name
+            // Check game name
             if(String.IsNullOrEmpty(request.name) == true)
             {
                 valid = false;
             }
             
-            // request.gameAccessLevel is never false
+            // request.accessLevel is never false
 
             return valid;
         }
@@ -63,18 +63,19 @@ namespace AvalonServer.Gameplay.CreateGame
             if(valid == false)
             {
                 String[] messages = new String[1];
-                messages[0] = "Invalid request format!";        
+                messages[0] = "Invalid request!";        
                 response.message = messages;
 
             } else
             {
                 var gameSettings = new GameSettings()
                 {
-                    gameAccessLevel = request.gameAccessLevel
+                    gameAccessLevel = request.accessLevel
                 };
-                var game = new Game(request.name, gameSettings);
-                var gameId = Gateway.CreateGame(game);
-                response.gameId = gameId;
+                throw new NotImplementedException();
+                //var game = new Game(request.name, gameSettings);
+                //var gameId = Gateway.CreateGame(game);
+                //response.gameId = gameId;
             }
             
             return response;

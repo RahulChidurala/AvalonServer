@@ -40,5 +40,10 @@ namespace AvalonServer.Gameplay.CreateGame
         {
             throw new NotImplementedException();
         }
+
+        public void UpdateGame(Game game)
+        {
+            throw new NotImplementedException();
+        }        
     }
 }

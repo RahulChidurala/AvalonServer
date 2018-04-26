@@ -14,20 +14,17 @@ namespace AvalonRestApi.Tests.Controllers
         [TestInitialize]
         public void Setup()
         {
-            var gateway = new PlayerGatewayInMemory();
+            throw new NotImplementedException();
+            /*var gateway = new PlayerGatewaySpy();
             var validator = new CreatePlayerValidator();
             var interactor = new CreatePlayerInteractor(gateway, validator);
-            controller = new CreatePlayerController(interactor);
+            controller = new CreatePlayerController(interactor);*/
         }
 
         [TestMethod]
         public void Test_CreatePlayer_UniqueUsername_CreateNewPlayer()
-        {
-            var request = new CreatePlayerMessages.Request()
-            {
-                Username = "uniqueUsername"
-            };
-            var jsonResponse = controller.Post(request);
+        {            
+            var jsonResponse = controller.Post("uniqueUsername");
 
             var response = JsonConvert.DeserializeObject<CreatePlayerMessages.Response>(jsonResponse);
 
@@ -35,15 +32,12 @@ namespace AvalonRestApi.Tests.Controllers
         }
 
         [TestMethod]
-        public void Test_CreatePlayer_DuplicateUsername_DoesNotCreatePlayer()
-        {
-            var request = new CreatePlayerMessages.Request()
-            {
-                Username = "uniqueUsername"
-            };
-            controller.Post(request);
+        public void Test_CreatePlayerController_DuplicateUsername_DoesNotCreatePlayer()
+        {            
+            var username = "uniqueUsername";
+            controller.Post(username);
 
-            var jsonResponse = controller.Post(request);
+            var jsonResponse = controller.Post(username);
 
             var response = JsonConvert.DeserializeObject<CreatePlayerMessages.Response>(jsonResponse);
 

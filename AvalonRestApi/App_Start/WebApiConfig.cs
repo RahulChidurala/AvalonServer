@@ -17,8 +17,8 @@ namespace AvalonRestApi
 
             config.Routes.MapHttpRoute(
                 name: "AvalonApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { controller="Welcome", id = RouteParameter.Optional }
+                routeTemplate: "api/{controller}",
+                defaults: new { controller="Welcome"}
             );
 
             config.Routes.MapHttpRoute(

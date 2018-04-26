@@ -4,6 +4,7 @@ using AvalonServer.Gameplay.JoinGame;
 using AvalonServer.Entities;
 using System.Collections.Generic;
 using AvalonServer.Gameplay.CreateGame;
+using AvalonServer.Gameplay.CreatePlayer;
 
 namespace AvalonServer.Tests.JoinGame
 {
@@ -12,12 +13,13 @@ namespace AvalonServer.Tests.JoinGame
     {
         IJoinGameInteractor sut;
         IJoinGameValidator validator = new JoinGameValidator();
-        IGameGateway gateway;
+        IGameGateway gameGateway;
+        IPlayerGateway playerGateway;
 
         [TestInitialize]
         public void Setup()
         {
-            gateway = new GameGatewayInMemory();
+            gameGateway = new GameGatewayInMemory();
             sut = MakeSut();
         }
 
@@ -25,17 +27,18 @@ namespace AvalonServer.Tests.JoinGame
         {
             var gameSettings = new GameSettings()
             {
-                gameAccessLevel = GameSettings.GameAccessLevel.GamePublic
+                gameAccessLevel = GameSettings.GameAccessLevel.Public
             };
-            var game = new Game("GameRoom1", gameSettings);
-            var gameId = gateway.CreateGame(game);
+            //var game = new Game("GameRoom1", gameSettings);
+            //var gameId = gameGateway.CreateGame(game);
 
-            return gameId;
+            //return gameId;
+            throw new NotImplementedException();
         }
 
         private IJoinGameInteractor MakeSut()
         {
-            return new JoinGameInteractor(validator, gateway);
+            return new JoinGameInteractor(validator, gameGateway, playerGateway);
         }
 
         [TestMethod]
@@ -49,7 +52,7 @@ namespace AvalonServer.Tests.JoinGame
 
             var response = sut.Handle(request);
 
-            Assert.IsTrue(response.joinedGame);
+            Assert.IsTrue(response.JoinedGame);
         }
 
         [TestMethod]
@@ -62,7 +65,7 @@ namespace AvalonServer.Tests.JoinGame
 
             var response = sut.Handle(request);
 
-            Assert.IsFalse(response.joinedGame);
+            Assert.IsFalse(response.JoinedGame);
         }
 
         [TestMethod]
@@ -75,9 +78,10 @@ namespace AvalonServer.Tests.JoinGame
             };
             var response = sut.Handle(request);
 
-            var game = gateway.GetGame(fakeGameId);
+            var game = gameGateway.GetGame(fakeGameId);
 
-            Assert.IsTrue(game.Players.Count == 1);
+            throw new NotImplementedException();
+            //Assert.IsTrue(game.Players.Count == 1);
         }
     }
 }

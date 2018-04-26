@@ -4,6 +4,7 @@ using AvalonServer.Gameplay.JoinGame;
 using AvalonServer.Entities;
 using System.Collections.Generic;
 using AvalonServer.Gameplay.CreatePlayer;
+using AvalonServer.Tests.Createplayer;
 
 namespace AvalonServer.Tests.CreatePlayer
 {
@@ -17,7 +18,7 @@ namespace AvalonServer.Tests.CreatePlayer
         [TestInitialize]
         public void Setup()
         {
-            gateway = new PlayerGatewayInMemory();
+            gateway = new PlayerGatewaySpy();
             validator = new CreatePlayerValidator();
             interactor = new CreatePlayerInteractor(gateway, validator);
         }
@@ -27,7 +28,8 @@ namespace AvalonServer.Tests.CreatePlayer
         {
             var request = new CreatePlayerMessages.Request()
             {
-                Username = ""
+                Username = "",
+                Password = ""
             };
 
             var response = interactor.Handle(request);

@@ -10,7 +10,7 @@ namespace AvalonServer.Gameplay.CreateGame
     {
         public struct Request
         {
-            public GameSettings.GameAccessLevel gameAccessLevel;
+            public GameSettings.GameAccessLevel accessLevel;
             public String name;
         }
 

@@ -9,7 +9,8 @@ namespace AvalonServer.Gameplay.CreatePlayer
     {
         public struct Request
         {
-            public String Username;            
+            public String Username;
+            public String Password;
         }
 
         public struct Response

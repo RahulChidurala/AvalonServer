@@ -7,12 +7,19 @@ namespace AvalonServer.Gameplay.CreateGame
     public interface IGameGateway
     {
         /// <summary>
-        /// 
+        /// Creates a game.
         /// </summary>
         /// <exception cref="">Throws GameGatewayException</exception>
         /// <param name="game"></param>
         int CreateGame(Game game);
         Game GetGame(int gameId);
+
+        /// <summary>
+        /// Updates game.
+        /// </summary>
+        /// <exception>Throws GameGatewayException</exception>
+        /// <param name="game"></param>
+        void UpdateGame(Game game);
         void DeleteGame(Game game);
 
         /// <summary>

@@ -20,10 +20,13 @@ namespace AvalonRestApi.Controllers
 
         // POST api/createplayer
         [HttpPost]
-        public string Post([FromBody]CreatePlayerMessages.Request request)
+        public string Post(string username)
         {
 
-           
+            var request = new CreatePlayerMessages.Request()
+            {
+                Username = username
+            };
 
             var response = interator.Handle(request);
             var jsonResponse = JsonConvert.SerializeObject(response);

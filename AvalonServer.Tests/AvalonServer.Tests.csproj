@@ -59,9 +59,15 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateAccount\AccountGatewaySpy.cs" />
+    <Compile Include="CreateAccount\CreateAccountInteractorTests.cs" />
     <Compile Include="CreateGame\CreateGameInteractorTests.cs" />
     <Compile Include="CreatePlayer\CreatePlayerInteractorTests.cs" />
+    <Compile Include="CreateAccount\CreateAccountRequestValidation.cs" />
+    <Compile Include="CreatePlayer\PlayerGatewaySpy.cs" />
+    <Compile Include="GatewaySpy.cs" />
     <Compile Include="JoinGame\JoinGameInteractorTests.cs" />
+    <Compile Include="LoginToAccount\LoginToAccountInteractorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

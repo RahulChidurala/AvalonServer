@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using AvalonServer.Gameplay.CreatePlayer;
 
 namespace AvalonServer.Gameplay.JoinGame
 {
@@ -41,30 +42,58 @@ namespace AvalonServer.Gameplay.JoinGame
     {
 
         private IJoinGameValidator Validator { get; }
-        private IGameGateway Gateway { get; }
-
-        public JoinGameInteractor(IJoinGameValidator validator, IGameGateway gateway)
+        private IGameGateway GameGateway { get; }
+        private IPlayerGateway PlayerGateway { get; }
+        
+        public JoinGameInteractor(IJoinGameValidator validator, IGameGateway gameGateway, IPlayerGateway playerGateway)
         {
             this.Validator = validator;
-            this.Gateway = gateway;
+            this.GameGateway = gameGateway;
+            this.PlayerGateway = playerGateway;
         }
 
+        // TODO
         public JoinGameMessages.Response Handle(JoinGameMessages.Request request)
         {
-            JoinGameMessages.Response response = new JoinGameMessages.Response();
 
-            var retrievedGame = Gateway.GetGame(request.gameId);
+            throw new NotImplementedException();
+            /*JoinGameMessages.Response response = new JoinGameMessages.Response();
+
+            var retrievedGame = GameGateway.GetGame(request.gameId);
             if (retrievedGame == null)
             {
-                response.joinedGame = false;
+                response.JoinedGame = false;
+                response.ErrorMessage = "Game with id " + request.gameId + " does not exist!";
 
             } else
             {
-                retrievedGame.Players.Add(new Player());
-                response.joinedGame = true;
+                var playerExists = PlayerGateway.GetPlayer(request.playerUsername);
+                if (playerExists != null)
+                {
+                    //// retrievedGame
+                    //if(retrievedGame.Players == null)
+                    //{
+                    //    retrievedGame.Players = new List<Player>();
+                    //}
+
+                    //retrievedGame.Players.Add(playerExists);
+                    //playerExists.GameId = request.gameId;
+                    throw new NotImplementedException();
+
+                    // DB transactions
+                    GameGateway.UpdateGame(retrievedGame);
+                    PlayerGateway.UpdatePlayer(playerExists);
+
+                    response.JoinedGame = true;
+
+                } else
+                {
+                    response.ErrorMessage = "Player with the username '" + request.playerUsername + "' does not exist!";
+                    response.JoinedGame = false;
+                }
             }            
 
-            return response;
+            return response;*/
         }
     }
 }

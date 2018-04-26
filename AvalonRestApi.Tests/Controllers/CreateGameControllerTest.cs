@@ -33,11 +33,11 @@ namespace AvalonRestApi.Tests.Controllers
         {
             var request = new CreateGameMessages.Request()
             {
-                gameAccessLevel = AvalonServer.Entities.GameSettings.GameAccessLevel.GamePublic,
+                accessLevel = AvalonServer.Entities.GameSettings.GameAccessLevel.Public,
                 name = "UniqueGameRoomName"
             };
 
-            var jsonResponse = controller.Post(request);
+            var jsonResponse = controller.Post("Public", "Game1");
             var response = JsonConvert.DeserializeObject<CreateGameMessages.Response>(jsonResponse);
 
             Assert.IsTrue(response.success);

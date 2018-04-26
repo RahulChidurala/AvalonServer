@@ -4,7 +4,7 @@ using AvalonServer.Gameplay.CreateGame;
 using AvalonServer.Entities;
 using System.Collections.Generic;
 
-namespace AvalonServer.Tests
+namespace AvalonServer.Tests.CreateGame
 {
     [TestClass]
     public class CreateGameRoomTests
@@ -33,7 +33,7 @@ namespace AvalonServer.Tests
 
             var request = new CreateGameMessages.Request()
             {
-                gameAccessLevel = GameSettings.GameAccessLevel.GameFriendsOnly,
+                accessLevel = GameSettings.GameAccessLevel.FriendsOnly,
                 name = "GameRoom1"
             };
             var response = sut.Handle(request);
@@ -46,7 +46,7 @@ namespace AvalonServer.Tests
         {
             var request = new CreateGameMessages.Request()
             {
-                gameAccessLevel = Entities.GameSettings.GameAccessLevel.GamePublic,
+                accessLevel = Entities.GameSettings.GameAccessLevel.Public,
                 name = String.Empty
             };
 
@@ -61,7 +61,7 @@ namespace AvalonServer.Tests
         {
             var request = new CreateGameMessages.Request()
             {
-                gameAccessLevel = Entities.GameSettings.GameAccessLevel.GamePublic,
+                accessLevel = Entities.GameSettings.GameAccessLevel.Public,
                 name = "GameRoom1"
             };
 
@@ -75,7 +75,7 @@ namespace AvalonServer.Tests
         {
             var request = new CreateGameMessages.Request()
             {
-                gameAccessLevel = Entities.GameSettings.GameAccessLevel.GamePublic,
+                accessLevel = Entities.GameSettings.GameAccessLevel.Public,
                 name = ""
             };
             var response = sut.Handle(request);
@@ -91,7 +91,7 @@ namespace AvalonServer.Tests
         {
             var request = new CreateGameMessages.Request()
             {
-                gameAccessLevel = Entities.GameSettings.GameAccessLevel.GamePublic,
+                accessLevel = Entities.GameSettings.GameAccessLevel.Public,
                 name = "GameRoom1"
             };
             var response1 = sut.Handle(request);
@@ -99,7 +99,7 @@ namespace AvalonServer.Tests
             var response2 = sut.Handle(request);
 
             Assert.IsFalse(response2.success);
-            Assert.IsTrue(gateway.games.Count == 1);
+            Assert.IsTrue(gameGateway.games.Count == 1);
         } */
 
         // Helpers        
@@ -127,6 +127,11 @@ namespace AvalonServer.Tests
             }
 
             public Game[] GetAllGames()
+            {
+                throw new NotImplementedException();
+            }
+
+            public void UpdateGame(Game game)
             {
                 throw new NotImplementedException();
             }

@@ -9,8 +9,8 @@ namespace AvalonServer.Entities
     {
         public enum GameAccessLevel
         {
-            GameFriendsOnly,
-            GamePublic
+            FriendsOnly,
+            Public
         }
 
         public GameAccessLevel gameAccessLevel { get; set; }

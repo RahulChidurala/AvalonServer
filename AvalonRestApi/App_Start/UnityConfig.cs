@@ -1,5 +1,7 @@
+using AvalonDatalayer;
 using AvalonServer.Gameplay.CreateGame;
 using AvalonServer.Gameplay.CreatePlayer;
+using AvalonServer.Gameplay.JoinGame;
 using System.Web.Http;
 using Unity;
 using Unity.WebApi;
@@ -18,14 +20,18 @@ namespace AvalonRestApi
             // e.g. container.RegisterType<ITestService, TestService>();
            
             // CreatePlayer types
-            container.RegisterType<IPlayerGateway, PlayerGatewayInMemory>();
+            container.RegisterType<IPlayerGateway, PlayerDatabase>();
             container.RegisterType<ICreatePlayerValidator, CreatePlayerValidator>();
             container.RegisterType<ICreatePlayerInteractor, CreatePlayerInteractor>();
 
             // CreateGame types
-            container.RegisterType<IGameGateway, GameGatewayInMemory>();
+            container.RegisterType<IGameGateway, GameDatabase>();
             container.RegisterType<ICreateGameValidator, CreateGameValidator>();
             container.RegisterType<ICreateGameInteractor, CreateGameInteractor>();
+
+            // JoinGame types
+            container.RegisterType<IJoinGameValidator, JoinGameValidator>();
+            container.RegisterType<IJoinGameInteractor, JoinGameInteractor>();            
 
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }

@@ -12,12 +12,13 @@ namespace AvalonServer.Gameplay.JoinGame
         public struct Request
         {
             public int gameId { get; set; }
-            public Player player { get; set; }
+            public string playerUsername { get; set; }
         }
 
         public struct Response
         {
-            public bool joinedGame { get; set; }
+            public bool JoinedGame { get; set; }
+            public string ErrorMessage { get; set; }
         }
 
         public struct ViewModel

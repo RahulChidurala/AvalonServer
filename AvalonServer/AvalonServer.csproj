@@ -51,6 +51,12 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -81,10 +87,21 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateAccount\AccountGateway.cs" />
+    <Compile Include="CreateAccount\CreateAccountInteractor.cs" />
+    <Compile Include="CreateAccount\CreateAccountMessages.cs" />
+    <Compile Include="CreateAccount\CreateAccountValidator.cs" />
+    <Compile Include="Entities\Account.cs" />
     <Compile Include="Entities\Character.cs" />
+    <Compile Include="Entities\ChosenPlayer.cs" />
+    <Compile Include="Entities\GameCharacters.cs" />
     <Compile Include="Entities\Game.cs" />
     <Compile Include="Entities\GameSettings.cs" />
+    <Compile Include="Entities\LeaderToken.cs" />
+    <Compile Include="Entities\Mission.cs" />
     <Compile Include="Entities\Player.cs" />
+    <Compile Include="Entities\Session.cs" />
+    <Compile Include="Entities\Vote.cs" />
     <Compile Include="Gameplay\CreateGame\CreateGameInteractor.cs" />
     <Compile Include="Gameplay\CreateGame\CreateGameMessages.cs" />
     <Compile Include="Gameplay\CreateGame\GameGateway.cs" />
@@ -92,10 +109,14 @@
     <Compile Include="Gameplay\CreatePlayer\CreatePlayerInteractor.cs" />
     <Compile Include="Gameplay\CreatePlayer\CreatePlayerMessages.cs" />
     <Compile Include="Gameplay\CreatePlayer\PlayerGateway.cs" />
-    <Compile Include="Gameplay\CreatePlayer\PlayerGatewayInMemory.cs" />
     <Compile Include="Gameplay\JoinGame\JoinGameInteractor.cs" />
     <Compile Include="Gameplay\JoinGame\JoinGameMessages.cs" />
+    <Compile Include="LoginToAccount\LoginInteractor.cs" />
+    <Compile Include="LoginToAccount\LoginMessages.cs" />
+    <Compile Include="LoginToAccount\LoginValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SessionWorkers\SessionCreator.cs" />
+    <Compile Include="SessionWorkers\SessionGateway.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Gameplay\Rules\" />

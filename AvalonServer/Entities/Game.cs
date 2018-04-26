@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -7,18 +8,22 @@ namespace AvalonServer.Entities
 {
     public class Game
     {
-        public String Name { get; }
-        public GameSettings Settings { get; }        
+        public String Name { get; set; }
+        public GameSettings Settings { get; set; }        
 
         public int GameId { get; set; }
-        public List<Player> Players { get; set; }
+    }
 
-        public Game(String name, GameSettings settings)
-        {
-            this.Name = name;
-            this.Settings = settings;
-
-            Players = new List<Player>();
-        }
+    public enum GameState
+    {
+        WaitingForPlayers,
+        CharacterAssignmentPhase,
+        CharacterRevealPhase,
+        PickingPhase,
+        VotingPhase,
+        VoteRevealPhase,
+        EndedPhase1,
+        EndedPhase2,
+        EndedFinal
     }
 }
