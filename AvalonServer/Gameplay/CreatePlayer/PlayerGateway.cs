@@ -19,7 +19,7 @@ namespace AvalonServer.Gameplay.CreatePlayer
         /// <summary>
         /// Gets player from storage for associated AccountId.
         /// </summary>
-        /// <param name="accountId">AccountId that the Player is associated with. There should be 1 Player for every Account.</param>
+        /// <param name="accountId">AccountId that the Player is associated with. There should be 1 Player for every IAccount.</param>
         /// <exception>Throws PlayerGatewayException</exception>
         /// <returns>Player with the associated AccountId.</returns>
         Player GetPlayerForAccount(int accountId);

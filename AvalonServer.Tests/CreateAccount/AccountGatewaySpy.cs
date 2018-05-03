@@ -10,11 +10,11 @@ namespace AvalonServer.Tests.CreateAccount
 {
     public class AccountGatewaySpy : IAccountGateway
     {
-        public Dictionary<int, Account> repo = new Dictionary<int, Account>();
+        public Dictionary<int, IAccount> repo = new Dictionary<int, IAccount>();
         public int maxId = 0;
 
         #region Implementation of AccountGateway
-        public int CreateAccount(Account account)
+        public int CreateAccount(IAccount account)
         {
             maxId++;
             account.Id = maxId;
@@ -27,14 +27,14 @@ namespace AvalonServer.Tests.CreateAccount
             repo.Remove(accountId);
         }
 
-        public Account GetAccount(string username)
+        public IAccount GetAccount(string username)
         {
             var account = GetAccountInternal(username);            
 
             return account;
         }
 
-        public void UpdateAccount(Account account)
+        public void UpdateAccount(IAccount account)
         {
             var accountExists = GetAccountInternal(account.Username);
 
@@ -49,12 +49,12 @@ namespace AvalonServer.Tests.CreateAccount
         #endregion
 
         #region Helper functions
-        private Account GetAccountInternal(string username)
+        private IAccount GetAccountInternal(string username)
         {
 
-            Account account = null;
+            IAccount account = null;
 
-            foreach (KeyValuePair<int, Account> entry in repo)
+            foreach (KeyValuePair<int, IAccount> entry in repo)
             {
 
                 if (entry.Value.Username == username)

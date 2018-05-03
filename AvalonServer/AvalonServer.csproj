@@ -94,6 +94,7 @@
     <Compile Include="Entities\Account.cs" />
     <Compile Include="Entities\Character.cs" />
     <Compile Include="Entities\ChosenPlayer.cs" />
+    <Compile Include="Entities\Factories\EntityFactory.cs" />
     <Compile Include="Entities\GameCharacters.cs" />
     <Compile Include="Entities\Game.cs" />
     <Compile Include="Entities\GameSettings.cs" />

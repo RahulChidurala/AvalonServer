@@ -60,7 +60,7 @@ namespace AvalonServer.CreateAccount
             int accountId;
             try
             {
-                var validatedAccount = new Account()
+                var validatedAccount = new IAccount()
                 {
                     Username = request.Username,
                     Password = request.Password

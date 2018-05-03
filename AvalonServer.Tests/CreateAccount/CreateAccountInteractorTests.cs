@@ -127,7 +127,7 @@ namespace AvalonServer.Tests.CreateAccount
             var response = Sut.Handle(request);
 
             Assert.AreEqual(PlayerGateway.repo.Count, 1, "Should have 1 account in repo, but have " + PlayerGateway.repo.Count);
-            Assert.AreEqual(PlayerGateway.repo.Values.ElementAt(0).AccountId, AccountGateway.repo.Values.ElementAt(0).Id, "Player's AccountId does not match Account.");
+            Assert.AreEqual(PlayerGateway.repo.Values.ElementAt(0).AccountId, AccountGateway.repo.Values.ElementAt(0).Id, "Player's AccountId does not match IAccount.");
         }
 
         [TestMethod]
@@ -147,8 +147,8 @@ namespace AvalonServer.Tests.CreateAccount
             Sut.Handle(request2);
 
             Assert.AreEqual(PlayerGateway.repo.Count, 2, "Should have 2 account in repo, but have " + PlayerGateway.repo.Count);
-            Assert.AreEqual(PlayerGateway.repo.Values.ElementAt(0).AccountId, AccountGateway.repo.Values.ElementAt(0).Id, "Player's AccountId does not match Account.");
-            Assert.AreEqual(PlayerGateway.repo.Values.ElementAt(1).AccountId, AccountGateway.repo.Values.ElementAt(1).Id, "Player's AccountId does not match Account.");
+            Assert.AreEqual(PlayerGateway.repo.Values.ElementAt(0).AccountId, AccountGateway.repo.Values.ElementAt(0).Id, "Player's AccountId does not match IAccount.");
+            Assert.AreEqual(PlayerGateway.repo.Values.ElementAt(1).AccountId, AccountGateway.repo.Values.ElementAt(1).Id, "Player's AccountId does not match IAccount.");
         }
         #endregion
     }

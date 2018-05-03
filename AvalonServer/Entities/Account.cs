@@ -1,12 +1,13 @@
 ﻿
 namespace AvalonServer.Entities
 {
-    public class Account
-    {
-        public int Id { get; set; }
 
-        public int PlayerId { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }    
+    public interface IAccount
+    {
+        int Id { get; set; }
+
+        int PlayerId { get; set; }
+        string Username { get; set; }
+        string Password { get; set; }    
     }
 }

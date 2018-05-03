@@ -40,7 +40,7 @@ namespace AvalonServer.LoginToAccount
                 return errorResponse;
             }
 
-            // Authenticate Account
+            // Authenticate IAccount
             try
             {
 

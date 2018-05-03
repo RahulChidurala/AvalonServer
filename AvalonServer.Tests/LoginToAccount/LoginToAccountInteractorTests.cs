@@ -122,7 +122,7 @@ namespace AvalonServer.Tests.LoginToAccount
                 Username = "User123",
                 Password = "password"
             };
-            var account = new Account()
+            var account = new IAccount()
             {
                 Id = 0,
                 PlayerId = 0,
