@@ -69,6 +69,7 @@
     <Compile Include="JoinGame\JoinGameInteractorTests.cs" />
     <Compile Include="LoginToAccount\LoginToAccountInteractorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Session\SessionGatewaySpy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

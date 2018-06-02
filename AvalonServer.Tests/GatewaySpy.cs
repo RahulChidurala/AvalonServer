@@ -14,6 +14,8 @@ namespace AvalonServer.Tests
             return account.Id;
         }
     }
+
+    // TODO: Lol get rid of this. Kinda confusing
     public abstract class GatewaySpy<Value>
     {        
         public Dictionary<int, Value> repo = new Dictionary<int, Value>();

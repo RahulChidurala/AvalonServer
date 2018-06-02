@@ -1,4 +1,7 @@
 ﻿using AvalonServer.CreateAccount;
+using AvalonServer.Entities;
+using AvalonServer.Gameplay.CreatePlayer;
+using AvalonServer.SessionWorkers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +18,17 @@ namespace AvalonServer.LoginToAccount
     {
         private ILoginValidator Validator;
         private AccountGateway AccountGateway;
+        private IPlayerGateway PlayerGateway;
+        private ISessionGateway SessionGateway;
+        private ISessionTokenCreator<string> SessionCreator;
 
-        public LoginInteractor(ILoginValidator validator, AccountGateway accountGateway)
+        public LoginInteractor(ILoginValidator validator, AccountGateway accountGateway, IPlayerGateway playerGateway, ISessionGateway sessionGateway, ISessionTokenCreator<string> sessionCreator)
         {
             Validator = validator;
             AccountGateway = accountGateway;
+            PlayerGateway = playerGateway;
+            SessionGateway = sessionGateway;
+            SessionCreator = sessionCreator;
         }
 
         public LoginMessages.Response Handle(LoginMessages.Request request)
@@ -41,10 +50,11 @@ namespace AvalonServer.LoginToAccount
             }
 
             // Authenticate Account
+            Account account; 
             try
             {
 
-                var account = AccountGateway.GetAccount(request.Username);
+                account = AccountGateway.GetAccount(request.Username);
                 if (account == null)
                 {
                     throw LoginException.Create(LoginExceptions.IncorrectCredentials);
@@ -66,9 +76,33 @@ namespace AvalonServer.LoginToAccount
                 return errorResponse;
             }
 
+            var sessionString = SessionCreator.CreateSession();
+            var session = new Session
+            {
+                Id = sessionString,
+                PlayerId = account.PlayerId, 
+                GameId = null
+            };
+
+            try
+            {
+                SessionGateway.CreateSession(session);
+            } catch(Exception e)
+            {
+                var message = e.Message;
+                var errorResponse = new LoginMessages.Response()
+                {
+                    Success = false,
+                    Exception = new Exception("Could not create a session! Error: " + message)
+                };
+
+                return errorResponse;
+            }
+
             var response = new LoginMessages.Response()
             {
                 Success = true,
+                Session = sessionString,
                 Exception = null
             };
 

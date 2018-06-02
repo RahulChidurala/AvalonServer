@@ -5,6 +5,6 @@ namespace AvalonServer.Entities
     {
         public string Id { get; set; }
         public int PlayerId { get; set; }
-        public int GameId { get; set; }       
+        public int? GameId { get; set; }       
     }
 }

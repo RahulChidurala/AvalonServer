@@ -1,7 +1,10 @@
 ﻿using System;
 using AvalonServer.Entities;
 using AvalonServer.LoginToAccount;
+using AvalonServer.SessionWorkers;
 using AvalonServer.Tests.CreateAccount;
+using AvalonServer.Tests.Createplayer;
+using AvalonServer.Tests.Session;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AvalonServer.Tests.LoginToAccount
@@ -12,13 +15,16 @@ namespace AvalonServer.Tests.LoginToAccount
 
         ILoginValidator Validator = new LoginValidator();
         AccountGatewaySpy AccountGateway = new AccountGatewaySpy();
+        PlayerGatewaySpy PlayerGateway = new PlayerGatewaySpy();
+        SessionGatewaySpy SessionGateway = new SessionGatewaySpy();
+        ISessionTokenCreator<string> SessionTokenCreator = new SessionCreatorGuid(); 
 
         ILoginInteractor Sut;
 
         [TestInitialize]
         public void Setup()
         {
-            Sut = new LoginInteractor(Validator, AccountGateway);
+            Sut = new LoginInteractor(Validator, AccountGateway, PlayerGateway, SessionGateway, SessionTokenCreator);
         }
 
         #region Login Request Validation tests
@@ -115,7 +121,7 @@ namespace AvalonServer.Tests.LoginToAccount
         }
 
         [TestMethod]
-        public void TestLogin_WithRequestWithValidAccount_ShouldSucceed()
+        public void TestLogin_WithRequestWithValidAccount_ShouldSucceedWithSessionTiedToAccount()
         {
             var request = new LoginMessages.Request()
             {
@@ -133,8 +139,20 @@ namespace AvalonServer.Tests.LoginToAccount
 
             var response = Sut.Handle(request);
 
-            Assert.IsTrue(response.Success, "Should have succeeded!");           
-        }
-        #endregion
+            Assert.IsTrue(response.Success, "Should have succeeded!");
+            Assert.IsNotNull(response.Session, "Should have a session!");
+
+            Entities.Session sessionForAccount;
+            try
+            {
+                sessionForAccount = SessionGateway.GetSessionFor(account.PlayerId);
+
+            } catch(Exception e)
+            {
+                Assert.Fail("Could not get session for account/player! " + e.Message);
+            }            
+        }        
+        #endregion     
+
     }
 }

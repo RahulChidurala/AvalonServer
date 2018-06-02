@@ -5,16 +5,16 @@ using System.Web;
 
 namespace AvalonServer.SessionWorkers
 {
-    public interface ISessionCreator
+    public interface ISessionTokenCreator<T>
     {
-        string CreateSession();
+        T CreateSession();
     }
 
-    public class SessionCreatorGuid : ISessionCreator
+    public class SessionCreatorGuid : ISessionTokenCreator<string>
     {
         public string CreateSession()
         {
             return Guid.NewGuid().ToString();
-        }
+        }        
     }
 }
