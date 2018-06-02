@@ -6,22 +6,22 @@ using System.Web;
 
 namespace AvalonServer.CreateAccount
 {
-    public interface IAccountGateway
+    public interface AccountGateway
     {
         /// <summary>
         /// Creates an account if there is no duplicate username.
         /// </summary>
         /// <exception cref="">Throws AccountGatewayException</exception>
         /// <param name="account"></param>
-        int CreateAccount(IAccount account);
-        IAccount GetAccount(string username);
+        int CreateAccount(Account account);
+        Account GetAccount(string username);
 
         /// <summary>
         /// Updates game.
         /// </summary>
         /// <exception>Throws GameGatewayException</exception>
         /// <param name="account"></param>
-        void UpdateAccount(IAccount account);
+        void UpdateAccount(Account account);
         void DeleteAccount(int accountId);
     }
     
@@ -30,13 +30,13 @@ namespace AvalonServer.CreateAccount
         public AccountGatewayException() { }
         public AccountGatewayException(string message) : base(message) { }
 
-        public static string GetMessage(AccountGatewayExceptionMessages exception, IAccount account, String extraMessage = null)
+        public static string GetMessage(AccountGatewayExceptionMessages exception, Account account, String extraMessage = null)
         {
             String exceptionMessage = "";
             switch(exception)
             {
                 case AccountGatewayExceptionMessages.AccountDoesNotExist:
-                    exceptionMessage = "IAccount does not exist for username: " + account.Username;
+                    exceptionMessage = "Account does not exist for username: " + account.Username;
                     break;                
                 case AccountGatewayExceptionMessages.DeleteAccountFailed:
                     exceptionMessage = "Could not delete account with username " + account.Username;

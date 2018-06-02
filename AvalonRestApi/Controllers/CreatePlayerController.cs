@@ -20,12 +20,13 @@ namespace AvalonRestApi.Controllers
 
         // POST api/createplayer
         [HttpPost]
-        public string Post(string username)
+        public string Post(string username, string password)
         {
 
             var request = new CreatePlayerMessages.Request()
             {
-                Username = username
+                Username = username,
+                Password = password
             };
 
             var response = interator.Handle(request);

@@ -9,7 +9,7 @@ namespace AvalonServer.Tests
 {
     public static class EntityIdExtension
     {
-        public static int GetId(this IAccount account)
+        public static int GetId(this Account account)
         {
             return account.Id;
         }

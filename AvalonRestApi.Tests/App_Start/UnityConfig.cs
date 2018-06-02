@@ -2,6 +2,10 @@ using AvalonServer.Gameplay.CreatePlayer;
 using AvalonServer.Gameplay.CreateGame;
 using System;
 using Unity;
+using AvalonServer.Tests.Createplayer;
+
+// TODO: Remove
+
 
 namespace AvalonRestApi.Tests
 {
@@ -42,7 +46,7 @@ namespace AvalonRestApi.Tests
             // container.LoadConfiguration();
             
             // CreatePlayer types
-            container.RegisterType<IPlayerGateway, PlayerGatewayInMemory>();
+            container.RegisterType<IPlayerGateway, PlayerGatewaySpy>();
             container.RegisterType<ICreatePlayerValidator, CreatePlayerValidator>();
             container.RegisterType<ICreatePlayerInteractor, CreatePlayerInteractor>();
 

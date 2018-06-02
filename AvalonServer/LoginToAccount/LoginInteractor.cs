@@ -14,9 +14,9 @@ namespace AvalonServer.LoginToAccount
     public class LoginInteractor : ILoginInteractor
     {
         private ILoginValidator Validator;
-        private IAccountGateway AccountGateway;
+        private AccountGateway AccountGateway;
 
-        public LoginInteractor(ILoginValidator validator, IAccountGateway accountGateway)
+        public LoginInteractor(ILoginValidator validator, AccountGateway accountGateway)
         {
             Validator = validator;
             AccountGateway = accountGateway;
@@ -40,7 +40,7 @@ namespace AvalonServer.LoginToAccount
                 return errorResponse;
             }
 
-            // Authenticate IAccount
+            // Authenticate Account
             try
             {
 

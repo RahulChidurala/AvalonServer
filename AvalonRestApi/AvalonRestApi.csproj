@@ -188,6 +188,7 @@
     <Compile Include="Controllers\CreateGameController.cs" />
     <Compile Include="Controllers\CreatePlayerController.cs" />
     <Compile Include="Controllers\JoinGameController.cs" />
+    <Compile Include="Controllers\Mock\MockLoginController.cs" />
     <Compile Include="Controllers\WelcomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -217,7 +218,10 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\MockGame\" />
+    <Folder Include="Views\MockLogin\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

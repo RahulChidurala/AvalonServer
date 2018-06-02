@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace AvalonServer.Tests.CreateAccount
 {
-    public class AccountGatewaySpy : IAccountGateway
+    public class AccountGatewaySpy : AccountGateway
     {
-        public Dictionary<int, IAccount> repo = new Dictionary<int, IAccount>();
+        public Dictionary<int, Account> repo = new Dictionary<int, Account>();
         public int maxId = 0;
 
         #region Implementation of AccountGateway
-        public int CreateAccount(IAccount account)
+        public int CreateAccount(Account account)
         {
             maxId++;
             account.Id = maxId;
@@ -27,14 +27,14 @@ namespace AvalonServer.Tests.CreateAccount
             repo.Remove(accountId);
         }
 
-        public IAccount GetAccount(string username)
+        public Account GetAccount(string username)
         {
             var account = GetAccountInternal(username);            
 
             return account;
         }
 
-        public void UpdateAccount(IAccount account)
+        public void UpdateAccount(Account account)
         {
             var accountExists = GetAccountInternal(account.Username);
 
@@ -49,12 +49,12 @@ namespace AvalonServer.Tests.CreateAccount
         #endregion
 
         #region Helper functions
-        private IAccount GetAccountInternal(string username)
+        private Account GetAccountInternal(string username)
         {
 
-            IAccount account = null;
+            Account account = null;
 
-            foreach (KeyValuePair<int, IAccount> entry in repo)
+            foreach (KeyValuePair<int, Account> entry in repo)
             {
 
                 if (entry.Value.Username == username)

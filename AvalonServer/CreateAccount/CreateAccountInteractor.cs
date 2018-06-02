@@ -15,10 +15,10 @@ namespace AvalonServer.CreateAccount
     public class CreateAccountInteractor : ICreateAccountInteractor
     {
         private ICreateAccountValidator Validator;
-        private IAccountGateway AccountGateway;
+        private AccountGateway AccountGateway;
         private IPlayerGateway PlayerGateway;
 
-        public CreateAccountInteractor(ICreateAccountValidator validator, IAccountGateway accountGateway, IPlayerGateway playerGateway)
+        public CreateAccountInteractor(ICreateAccountValidator validator, AccountGateway accountGateway, IPlayerGateway playerGateway)
         {
             Validator = validator;
             AccountGateway = accountGateway;
@@ -59,15 +59,14 @@ namespace AvalonServer.CreateAccount
             // Store in Gateway
             int accountId;
             try
-            {
-                var validatedAccount = new IAccount()
+            {                
+                var validatedAccount = new Account()
                 {
                     Username = request.Username,
                     Password = request.Password
                 };
 
                 accountId = AccountGateway.CreateAccount(validatedAccount);
-
             }
             catch (AccountGatewayException ex)
             {

@@ -148,6 +148,10 @@
       <Project>{85266436-49EE-4A29-93A5-B23839FBCBB0}</Project>
       <Name>AvalonRestApi</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AvalonServer.Tests\AvalonServer.Tests.csproj">
+      <Project>{06078270-f328-4dbb-ba95-d01d352d8aa3}</Project>
+      <Name>AvalonServer.Tests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AvalonServer\AvalonServer.csproj">
       <Project>{8B1FEFD1-BE41-4DF1-BB9C-68455027D30D}</Project>
       <Name>AvalonServer</Name>
