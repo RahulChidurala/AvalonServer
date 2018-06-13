@@ -9,7 +9,7 @@ namespace AvalonServer.Entities
     public class Game
     {
         public String Name { get; set; }
-        public GameSettings Settings { get; set; }        
+        public GameSettings.GameAccessLevel AccessLevel { get; set; }        
 
         public int GameId { get; set; }
     }

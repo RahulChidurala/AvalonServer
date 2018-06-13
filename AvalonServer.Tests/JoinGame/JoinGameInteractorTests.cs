@@ -2,8 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AvalonServer.Gameplay.JoinGame;
 using AvalonServer.Entities;
-using System.Collections.Generic;
-using AvalonServer.Gameplay.CreateGame;
+using AvalonServer.CreateGame;
 using AvalonServer.Gameplay.CreatePlayer;
 
 namespace AvalonServer.Tests.JoinGame

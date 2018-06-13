@@ -1,7 +1,7 @@
 ﻿using System;
 using AvalonServer.Entities;
 
-namespace AvalonServer.Gameplay.CreateGame
+namespace AvalonServer.CreateGame
 {
 
     public interface IGameGateway
@@ -13,6 +13,7 @@ namespace AvalonServer.Gameplay.CreateGame
         /// <param name="game"></param>
         int CreateGame(Game game);
         Game GetGame(int gameId);
+        Game GetGameBy(string name);
 
         /// <summary>
         /// Updates game.

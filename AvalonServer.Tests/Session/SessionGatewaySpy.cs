@@ -13,9 +13,11 @@ namespace AvalonServer.Tests.Session
 
         Dictionary<string, Entities.Session> store = new Dictionary<string, Entities.Session>(); 
 
-        public void CreateSession(Entities.Session session)
+        public string CreateSession(Entities.Session session)
         {
-            store.Add(UniqueID(), session);
+            var id = UniqueID();
+            store.Add(id, session);
+            return id;
         }
 
         public void DeleteSession(string sessionKey)

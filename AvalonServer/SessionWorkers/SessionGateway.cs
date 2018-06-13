@@ -8,7 +8,7 @@ namespace AvalonServer.SessionWorkers
 {
     public interface ISessionGateway
     {
-        void CreateSession(Session session);        
+        string CreateSession(Session session);        
 
         /// <returns>Session or null if sessionKey DNE</returns>
         Session GetSession(string sessionKey);

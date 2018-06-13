@@ -91,6 +91,9 @@
     <Compile Include="CreateAccount\CreateAccountInteractor.cs" />
     <Compile Include="CreateAccount\CreateAccountMessages.cs" />
     <Compile Include="CreateAccount\CreateAccountValidator.cs" />
+    <Compile Include="CreateGame\CreateGameInteractor.cs" />
+    <Compile Include="CreateGame\CreateGameMessages.cs" />
+    <Compile Include="CreateGame\CreateGameValidator.cs" />
     <Compile Include="Entities\Account.cs" />
     <Compile Include="Entities\Character.cs" />
     <Compile Include="Entities\ChosenPlayer.cs" />
@@ -102,10 +105,8 @@
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Entities\Session.cs" />
     <Compile Include="Entities\Vote.cs" />
-    <Compile Include="Gameplay\CreateGame\CreateGameInteractor.cs" />
-    <Compile Include="Gameplay\CreateGame\CreateGameMessages.cs" />
-    <Compile Include="Gameplay\CreateGame\GameGateway.cs" />
-    <Compile Include="Gameplay\CreateGame\GameGatewayInMemory.cs" />
+    <Compile Include="CreateGame\GameGateway.cs" />
+    <Compile Include="CreateGame\GameGatewayInMemory.cs" />
     <Compile Include="Gameplay\CreatePlayer\CreatePlayerInteractor.cs" />
     <Compile Include="Gameplay\CreatePlayer\CreatePlayerMessages.cs" />
     <Compile Include="Gameplay\CreatePlayer\PlayerGateway.cs" />

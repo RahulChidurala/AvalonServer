@@ -1,8 +1,10 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using AvalonServer.Gameplay.CreateGame;
+using AvalonServer.CreateGame;
 using AvalonServer.Entities;
 using System.Collections.Generic;
+using AvalonServer.SessionWorkers;
+using AvalonServer.Tests.Session;
 
 namespace AvalonServer.Tests.CreateGame
 {
@@ -10,18 +12,33 @@ namespace AvalonServer.Tests.CreateGame
     public class CreateGameRoomTests
     {
         ICreateGameInteractor sut;
-        CreateGameValidator validator = new CreateGameValidator();
-        GameGatewaySpy gateway = new GameGatewaySpy();
+        ICreateGameValidator validator = new CreateGameValidator();
+        SessionGatewaySpy SessionGateway = new SessionGatewaySpy(); 
+        GameGatewaySpy GameGateway = new GameGatewaySpy();
+
+        Entities.Session storedSession;
 
         [TestInitialize]
         public void Setup()
         {
             sut = MakeSut();
+            SessionGateway = new SessionGatewaySpy();
+
+            // Insert fake session
+            var session = new Entities.Session()
+            {
+                GameId = 1,
+                Id = "", // Assigned by gateway
+                PlayerId = 1
+            };
+
+            SessionGateway.CreateSession(session);
+            storedSession = session;
         }
 
         private ICreateGameInteractor MakeSut()
         {
-            return new CreateGameInteractor(validator, gateway);
+            return new CreateGameInteractor(validator, SessionGateway, GameGateway);
         }
 
         // TODO: Make validator throw expected exceptions
@@ -33,12 +50,13 @@ namespace AvalonServer.Tests.CreateGame
 
             var request = new CreateGameMessages.Request()
             {
-                accessLevel = GameSettings.GameAccessLevel.FriendsOnly,
-                name = "GameRoom1"
+                Session = storedSession,
+                AccessLevel = GameSettings.GameAccessLevel.FriendsOnly,
+                GameName = "GameRoom1"
             };
             var response = sut.Handle(request);
 
-            Assert.IsTrue(response.success);
+            Assert.IsTrue(response.Success, "Should have succeeded. Exception: " + response.Exception.Message);
         }
 
         [TestMethod]
@@ -46,13 +64,13 @@ namespace AvalonServer.Tests.CreateGame
         {
             var request = new CreateGameMessages.Request()
             {
-                accessLevel = Entities.GameSettings.GameAccessLevel.Public,
-                name = String.Empty
+                AccessLevel = Entities.GameSettings.GameAccessLevel.Public,
+                GameName = String.Empty
             };
 
             var response = sut.Handle(request);
 
-            Assert.IsFalse(response.success);
+            Assert.IsFalse(response.Success);
         }
 
         // CreateGameRoom Gateway tests       
@@ -61,13 +79,14 @@ namespace AvalonServer.Tests.CreateGame
         {
             var request = new CreateGameMessages.Request()
             {
-                accessLevel = Entities.GameSettings.GameAccessLevel.Public,
-                name = "GameRoom1"
+                AccessLevel = Entities.GameSettings.GameAccessLevel.Public,
+                GameName = "GameRoom1"
             };
 
             var response = sut.Handle(request);
-            
-            Assert.IsTrue(gateway.GetGame(response.gameId) != null);
+            Assert.IsTrue(response.Success, "Should have succeeded. Exception: " + response.Exception.Message);
+            Assert.IsNotNull(response.GameId, "GameId is not null");
+            Assert.IsTrue(GameGateway.GetGame((int) response.GameId) != null);
         }
 
         [TestMethod]
@@ -75,12 +94,12 @@ namespace AvalonServer.Tests.CreateGame
         {
             var request = new CreateGameMessages.Request()
             {
-                accessLevel = Entities.GameSettings.GameAccessLevel.Public,
-                name = ""
+                AccessLevel = Entities.GameSettings.GameAccessLevel.Public,
+                GameName = ""
             };
             var response = sut.Handle(request);
 
-            Assert.IsTrue(gateway.games.Count == 0);
+            Assert.IsTrue(GameGateway.games.Count == 0);
         }
 
         // TODO: Do duplicate GameRoom tests
@@ -123,7 +142,8 @@ namespace AvalonServer.Tests.CreateGame
 
             public void DeleteGame(Game game)
             {
-                throw new NotImplementedException();
+
+                games.Remove(game.GameId);
             }
 
             public Game[] GetAllGames()
@@ -132,6 +152,11 @@ namespace AvalonServer.Tests.CreateGame
             }
 
             public void UpdateGame(Game game)
+            {
+                throw new NotImplementedException();
+            }
+
+            public Game GetGameBy(string name)
             {
                 throw new NotImplementedException();
             }

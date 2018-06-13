@@ -1,4 +1,4 @@
-﻿using AvalonServer.Gameplay.CreateGame;
+﻿using AvalonServer.CreateGame;
 using AvalonServer.Entities;
 using System;
 using System.Collections.Generic;
