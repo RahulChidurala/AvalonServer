@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Web.Http;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using AvalonRestApi;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AvalonRestApi.Controllers;
-using AvalonServer.Gameplay.CreateGame;
+using AvalonServer.CreateGame;
 using Newtonsoft.Json;
+using AvalonServer.Tests.Session;
 
 namespace AvalonRestApi.Tests.Controllers
 {
@@ -23,7 +17,8 @@ namespace AvalonRestApi.Tests.Controllers
         {
             var gateway = new GameGatewayInMemory();
             var validator = new CreateGameValidator();
-            var interactor = new CreateGameInteractor(validator, gateway);
+            var session = new SessionGatewaySpy();
+            var interactor = new CreateGameInteractor(validator, session, gateway);
 
             controller = new CreateGameController(interactor);
         }
@@ -33,14 +28,14 @@ namespace AvalonRestApi.Tests.Controllers
         {
             var request = new CreateGameMessages.Request()
             {
-                accessLevel = AvalonServer.Entities.GameSettings.GameAccessLevel.Public,
-                name = "UniqueGameRoomName"
+                AccessLevel = AvalonServer.Entities.GameSettings.GameAccessLevel.Public,
+                GameName = "UniqueGameRoomName"
             };
 
             var jsonResponse = controller.Post("Public", "Game1");
             var response = JsonConvert.DeserializeObject<CreateGameMessages.Response>(jsonResponse);
 
-            Assert.IsTrue(response.success);
+            Assert.IsTrue(response.Success);
         }
     }
 }

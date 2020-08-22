@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AvalonServer.Tests.Session
 {
-    class SessionGatewaySpy : ISessionGateway
+    public class SessionGatewaySpy : ISessionGateway
     {
 
         Dictionary<string, Entities.Session> store = new Dictionary<string, Entities.Session>(); 

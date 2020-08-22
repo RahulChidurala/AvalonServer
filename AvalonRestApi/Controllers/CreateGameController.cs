@@ -1,5 +1,5 @@
 ﻿using AvalonServer.Entities;
-using AvalonServer.Gameplay.CreateGame;
+using AvalonServer.CreateGame;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -38,8 +38,8 @@ namespace AvalonRestApi.Controllers
 
             var request = new CreateGameMessages.Request()
             {
-                accessLevel = _gameAccessLevel,
-                name = gameName
+                AccessLevel = _gameAccessLevel,
+                GameName = gameName
             };
             var response = interactor.Handle(request);
 

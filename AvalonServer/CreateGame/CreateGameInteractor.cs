@@ -45,7 +45,7 @@ namespace AvalonServer.CreateGame
             try
             {
                 var sessionExists = SessionGateway.GetSession(request.Session.Id);
-                if(sessionExists == null) // TODO: Gateway should throw
+                if(sessionExists == null)
                 {
                     throw new Exception("Session does not valid!");
                 }

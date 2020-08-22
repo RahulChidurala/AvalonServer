@@ -1,5 +1,5 @@
 using AvalonDatalayer;
-using AvalonServer.Gameplay.CreateGame;
+using AvalonServer.CreateGame;
 using AvalonServer.Gameplay.CreatePlayer;
 using AvalonServer.Gameplay.JoinGame;
 using System.Web.Http;

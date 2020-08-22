@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using AvalonServer.CreateGame;
 using AvalonServer.Entities;
-using AvalonServer.Gameplay.CreateGame;
 
 namespace AvalonDatalayer
 {
@@ -60,6 +59,16 @@ namespace AvalonDatalayer
                 //int[] gameIdArray = { gameId };
                 db.Configuration.ProxyCreationEnabled = false;
                 return db.Games.Find(gameId);
+            }
+        }
+
+        public Game GetGameBy(string name)
+        {
+            using (var db = new AvalonContext())
+            {
+                //int[] gameIdArray = { gameId };
+                db.Configuration.ProxyCreationEnabled = false;
+                return db.Games.Find(name);
             }
         }
 

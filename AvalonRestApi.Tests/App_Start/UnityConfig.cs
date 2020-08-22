@@ -1,5 +1,5 @@
 using AvalonServer.Gameplay.CreatePlayer;
-using AvalonServer.Gameplay.CreateGame;
+using AvalonServer.CreateGame;
 using System;
 using Unity;
 using AvalonServer.Tests.Createplayer;

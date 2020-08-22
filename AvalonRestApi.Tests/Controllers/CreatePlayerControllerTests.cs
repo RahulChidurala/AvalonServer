@@ -24,7 +24,7 @@ namespace AvalonRestApi.Tests.Controllers
         [TestMethod]
         public void Test_CreatePlayer_UniqueUsername_CreateNewPlayer()
         {            
-            var jsonResponse = controller.Post("uniqueUsername");
+            var jsonResponse = controller.Post("uniqueUsername", "password");
 
             var response = JsonConvert.DeserializeObject<CreatePlayerMessages.Response>(jsonResponse);
 
@@ -35,9 +35,10 @@ namespace AvalonRestApi.Tests.Controllers
         public void Test_CreatePlayerController_DuplicateUsername_DoesNotCreatePlayer()
         {            
             var username = "uniqueUsername";
-            controller.Post(username);
+            var password = "password";
+            controller.Post(username, password);
 
-            var jsonResponse = controller.Post(username);
+            var jsonResponse = controller.Post(username, password);
 
             var response = JsonConvert.DeserializeObject<CreatePlayerMessages.Response>(jsonResponse);
 
